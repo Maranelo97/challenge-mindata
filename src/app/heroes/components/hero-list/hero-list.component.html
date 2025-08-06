@@ -1,0 +1,75 @@
+<div class="card-grid" *ngIf="isImagesLoaded; else loadingTemplate">
+  <mat-card
+    class="hero-card animated"
+    appearance="outlined"
+    *ngFor="let hero of visibleHeroes; let i = index"
+    [ngStyle]="{ animationDelay: i * 100 + 'ms' }"
+  >
+    <mat-card-header>
+      <mat-card-title>{{ hero.name }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ hero.biography.fullName || "Unknown Identity" }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <img
+      mat-card-image
+      [src]="hero.images.lg"
+      [alt]="hero.name"
+      loading="lazy"
+    />
+
+    <mat-card-content class="stats">
+      <div class="stat-line">
+        <span class="label">🧠 Intelligence</span>
+        <span class="value">{{ hero.powerstats.intelligence }}</span>
+      </div>
+      <div class="stat-line">
+        <span class="label">💪 Strength</span>
+        <span class="value">{{ hero.powerstats.strength }}</span>
+      </div>
+      <div class="stat-line">
+        <span class="label">⚡ Speed</span>
+        <span class="value">{{ hero.powerstats.speed }}</span>
+      </div>
+      <div class="stat-line">
+        <span class="label">🛡️ Durability</span>
+        <span class="value">{{ hero.powerstats.durability }}</span>
+      </div>
+      <div class="stat-line">
+        <span class="label">🔋 Power</span>
+        <span class="value">{{ hero.powerstats.power }}</span>
+      </div>
+      <div class="stat-line">
+        <span class="label">⚔️ Combat</span>
+        <span class="value">{{ hero.powerstats.combat }}</span>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-icon-button (click)="openDetails(hero)">
+        <mat-icon style="color: white">visibility</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+<div #anchor style="height: 1px"></div>
+
+<div class="offcanvas" [class.open]="isDrawerOpen">
+  <div class="offcanvas-backdrop" (click)="closeDrawer()"></div>
+
+  <div class="offcanvas-panel">
+    <app-hero-details
+      *ngIf="selectedHero"
+      [hero]="selectedHero"
+      (close)="closeDrawer()"
+    ></app-hero-details>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

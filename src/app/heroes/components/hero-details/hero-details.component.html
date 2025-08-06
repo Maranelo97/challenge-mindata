@@ -1,0 +1,44 @@
+<div class="hero-details">
+ <div class="hero-header">
+  <h2>{{ hero.name }}</h2>
+  <button mat-icon-button color="warn" (click)="close.emit()" aria-label="Cerrar">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+  <h4>{{ hero.biography.fullName || "Unknown Identity" }}</h4>
+
+  <img [src]="hero.images.lg" [alt]="hero.name" class="hero-image" />
+
+  <h3>Powerstats</h3>
+  <ul class="stats-list">
+    <li>
+      <strong>🧠 Intelligence:</strong> {{ hero.powerstats.intelligence }}
+    </li>
+    <li><strong>💪 Strength:</strong> {{ hero.powerstats.strength }}</li>
+    <li><strong>⚡ Speed:</strong> {{ hero.powerstats.speed }}</li>
+    <li><strong>🛡️ Durability:</strong> {{ hero.powerstats.durability }}</li>
+    <li><strong>🔋 Power:</strong> {{ hero.powerstats.power }}</li>
+    <li><strong>⚔️ Combat:</strong> {{ hero.powerstats.combat }}</li>
+  </ul>
+
+  <h3>Biography</h3>
+  <ul>
+    <li><strong>Full Name:</strong> {{ hero.biography.fullName }}</li>
+    <li><strong>Place of Birth:</strong> {{ hero.biography.placeOfBirth }}</li>
+    <li><strong>Publisher:</strong> {{ hero.biography.publisher }}</li>
+    <li>
+      <strong>First Appearance:</strong> {{ hero.biography.firstAppearance }}
+    </li>
+    <li><strong>Alignment:</strong> {{ hero.biography.alignment }}</li>
+  </ul>
+
+  <h3>Appearance</h3>
+  <ul>
+    <li><strong>Gender:</strong> {{ hero.appearance.gender }}</li>
+    <li><strong>Race:</strong> {{ hero.appearance.race }}</li>
+    <li><strong>Height:</strong> {{ hero.appearance.height.join(", ") }}</li>
+    <li><strong>Weight:</strong> {{ hero.appearance.weight.join(", ") }}</li>
+    <li><strong>Eye Color:</strong> {{ hero.appearance.eyeColor }}</li>
+    <li><strong>Hair Color:</strong> {{ hero.appearance.hairColor }}</li>
+  </ul>
+</div>

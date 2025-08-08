@@ -28,7 +28,7 @@ export class HeroListComponent implements OnInit {
   isImagesLoaded = false;
   heroes: Hero[] = [];
   visibleHeroes: Hero[] = [];
-  batchSize = 24;
+  batchSize = 20;
   currentIndex = 0;
 
   selectedHero: Hero | null = null;
@@ -40,13 +40,13 @@ export class HeroListComponent implements OnInit {
 
   constructor(private heroesService: HeroesService) {}
 
-  ngOnInit(): void {
-    this.heroesService.getAllHeroes();
-    this.heroesService.heroes$.subscribe((heroes) => {
-      this.heroes = heroes;
-      this.loadMore(); // Carga inicial
-    });
-  }
+ngOnInit(): void {
+  this.heroesService.getAllHeroes();
+  this.heroesService.heroes$.subscribe((heroes) => {
+    this.heroes = heroes; // ahora es un arreglo de héroes
+    this.loadMore(); // carga inicial
+  });
+}
 
 ngAfterViewInit(): void {
   this.observer = new IntersectionObserver(([entry]) => {

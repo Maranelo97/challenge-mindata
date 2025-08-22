@@ -1,1 +1,26 @@
-<p>hero-filter works!</p>
+<div class="custom-search">
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    (input)="onSearch()"
+    placeholder="🔍 Search Hero"
+  />
+
+  @if (filteredHeroes.length > 0) {
+  <ul class="suggestions">
+    @for (hero of filteredHeroes; track hero.id) {
+    <li
+      [class.good]="hero.biography.alignment === 'good'"
+      [class.bad]="hero.biography.alignment === 'bad'"
+      (click)="selectHero(hero.name)"
+    >
+      {{ hero.name }}
+    </li>
+    } 
+  </ul>
+  }
+
+  <div class="add-hero">
+    <button>Add Your Hero!</button>
+  </div>
+</div>

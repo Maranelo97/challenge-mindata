@@ -1,0 +1,135 @@
+.custom-search {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+  font-family: "Orbitron", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px; /* <--- Espacio entre input y botón */
+}
+
+.add-hero {
+  flex-shrink: 0; /* Evita que se reduzca el botón si el input crece */
+}
+
+.add-hero button {
+  padding: 14px 36px; /* Más alto y más ancho */
+  border-radius: 18px;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(145deg, #ff4081, #00e5ff);
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite, neon-pulse 1.5s ease-in-out infinite alternate;
+  box-shadow: 0 0 15px rgba(255, 64, 129, 0.6),
+              0 0 25px rgba(0, 229, 255, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.add-hero button:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 25px rgba(255, 64, 129, 0.9),
+              0 0 40px rgba(0, 229, 255, 0.7);
+}
+
+/* Animación para que el degradado se mueva */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.custom-search input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.4), 0 0 20px rgba(0, 229, 255, 0.2);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.custom-search input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 4px rgba(255, 64, 129, 0.5);
+}
+
+.custom-search input:focus {
+  box-shadow: 0 0 15px rgba(255, 64, 129, 0.7), 0 0 30px rgba(0, 229, 255, 0.5);
+  transform: scale(1.02);
+}
+
+.suggestions {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: rgba(18, 18, 18, 0.95);
+  border-radius: 12px;
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 8px 0;
+  /* Use the new neon-pulse animation */
+  animation: fadeIn 0.3s ease forwards,
+    neon-pulse 1.5s ease-in-out infinite alternate;
+  z-index: 100;
+}
+
+.suggestions li {
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  color: #fff;
+}
+
+.suggestions li:hover {
+  /* Establece un estilo por defecto, que luego será sobrescrito */
+  background: rgba(255, 64, 129, 0.7);
+  transform: scale(1.22);
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.7), 0 0 20px rgba(0, 229, 255, 0.5);
+}
+
+.suggestions li.good:hover {
+  background: rgba(0, 229, 255, 0.3); /* Fondo celeste neon */
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.7), 0 0 20px rgba(255, 64, 129, 0.5); /* Brillo celeste/rosa */
+}
+
+.suggestions li.bad:hover {
+  background: rgba(255, 64, 129, 0.3); /* Fondo rosa neon */
+  transform: scale(1.02);
+  box-shadow: 0 0 10px rgba(255, 64, 129, 0.7), 0 0 20px rgba(0, 229, 255, 0.5); /* Brillo rosa/celeste */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes neon-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(255, 64, 129, 0.4),
+      0 0 20px rgba(0, 229, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 64, 129, 0.7),
+      0 0 30px rgba(0, 229, 255, 0.5);
+  }
+}

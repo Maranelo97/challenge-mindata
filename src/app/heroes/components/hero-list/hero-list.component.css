@@ -3,6 +3,7 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
   padding: 24px;
+  perspective: 1000px;
 }
 
 .hero-card {
@@ -11,11 +12,27 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 30px rgba(0, 0, 0, 0.6);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.15s ease, box-shadow 0.3s ease;
   transform-style: preserve-3d;
-  perspective: 1000px;
-    opacity: 0;
+
+  opacity: 0;
   animation: fadeInUp 0.6s ease forwards;
+}
+
+.hero-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(255, 255, 255, 0.075),
+    transparent 60%
+  );
+  pointer-events: none;
+  transition: background 0.1s ease;
 }
 
 .hero-card.animated {
@@ -106,7 +123,6 @@ button[mat-button]:hover {
   text-shadow: 0 0 3px rgba(0, 230, 118, 0.6);
 }
 
-
 /* === OFFCANVAS CONTAINER === */
 .offcanvas {
   position: fixed;
@@ -137,9 +153,7 @@ button[mat-button]:hover {
   height: 100%;
   background: rgba(18, 18, 18, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
-  box-shadow:
-    -10px 0 30px rgba(0, 0, 0, 0.7),
-    0 0 40px rgba(255, 64, 129, 0.2),
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.7), 0 0 40px rgba(255, 64, 129, 0.2),
     0 0 10px rgba(0, 255, 255, 0.1);
   transform: translateX(100%);
   animation: slideInDrawer 0.4s ease forwards;
@@ -160,7 +174,6 @@ button[mat-button]:hover {
   }
 }
 
-
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -170,4 +183,44 @@ button[mat-button]:hover {
     opacity: 1;
     transform: translateY(0);
   }
+}
+/* ====== BASE HOVER ====== */
+.hero-card:hover {
+  transform: translateY(-10px) rotateX(5deg) rotateY(3deg);
+}
+
+/* ====== BAD HEROES (default estilo original) ====== */
+.hero-card.bad:hover {
+  box-shadow: 0 40px 60px rgba(255, 0, 85, 0.4);
+}
+.hero-card.bad mat-card-title {
+  color: #ff4081;
+  text-shadow: 0 0 4px rgba(255, 64, 129, 0.6), 0 0 10px rgba(255, 64, 129, 0.2);
+}
+.hero-card.bad .value {
+  color: #ff4081;
+  text-shadow: 0 0 3px rgba(255, 64, 129, 0.6);
+}
+
+/* ====== GOOD HEROES ====== */
+
+/* GOOD HERO glow extra */
+.hero-card.good:hover {
+  box-shadow: 0 40px 60px rgba(0, 229, 255, 0.5);
+}
+.hero-card.good mat-card-title {
+  color: #00e5ff;
+  text-shadow: 0 0 4px rgba(0, 229, 255, 0.6), 0 0 10px rgba(0, 229, 255, 0.2);
+}
+.hero-card.good .value {
+  color: #00e5ff;
+  text-shadow: 0 0 3px rgba(0, 229, 255, 0.6);
+}
+
+/* ====== OPCIONAL: borde glow según facción ====== */
+.hero-card.good {
+  border: 1px solid rgba(0, 229, 255, 0.3);
+}
+.hero-card.bad {
+  border: 1px solid rgba(255, 64, 129, 0.3);
 }

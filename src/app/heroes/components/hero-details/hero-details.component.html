@@ -1,15 +1,22 @@
 <div class="hero-details">
- <div class="hero-header">
-  <h2>{{ hero.name }}</h2>
-  <button mat-icon-button color="warn" (click)="close.emit()" aria-label="Cerrar">
-    <mat-icon>close</mat-icon>
-  </button>
-</div>
+  <div class="hero-header">
+    <h2>{{ hero.name }}</h2>
+    <button
+      mat-icon-button
+      color="warn"
+      (click)="close.emit()"
+      aria-label="Cerrar"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <h4>{{ hero.biography.fullName || "Unknown Identity" }}</h4>
 
-  <img [src]="hero.images.lg" [alt]="hero.name" class="hero-image" />
-
   <h3>Powerstats</h3>
+  <div class="hero-chart-container">
+    <canvas #radarChart></canvas>
+  </div>
+
   <ul class="stats-list">
     <li>
       <strong>🧠 Intelligence:</strong> {{ hero.powerstats.intelligence }}
